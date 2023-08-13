@@ -1,5 +1,5 @@
 //  Set delay time for the mux
-int delayInt = 1;
+int refeshRate = 2;
 
 // set pins
 // inputs
@@ -76,120 +76,123 @@ void segDP() {
 
 void display0() {
   segA();
-  delay(delayInt);
+  delay(refeshRate);
   segB();
-  delay(delayInt);
+  delay(refeshRate);
   segC();
-  delay(delayInt);
+  delay(refeshRate);
   segD();
-  delay(delayInt);
+  delay(refeshRate);
   segE();
-  delay(delayInt);
+  delay(refeshRate);
   segF();
-  delay(delayInt);
+  delay(refeshRate);
 }
 void display1() {
   segB();
-  delay(delayInt);
+  delay(refeshRate);
   segC();
-  delay(delayInt);
+  delay(refeshRate);
 }
 void display2() {
   segA();
-  delay(delayInt);
+  delay(refeshRate);
   segB();
-  delay(delayInt);
+  delay(refeshRate);
   segG();
-  delay(delayInt);
+  delay(refeshRate);
   segE();
-  delay(delayInt);
+  delay(refeshRate);
   segD();
-  delay(delayInt);
+  delay(refeshRate);
 }
 void display3() {
   segA();
-  delay(delayInt);
+  delay(refeshRate);
   segB();
-  delay(delayInt);
+  delay(refeshRate);
   segG();
-  delay(delayInt);
+  delay(refeshRate);
   segC();
-  delay(delayInt);
+  delay(refeshRate);
   segD();
-  delay(delayInt);
+  delay(refeshRate);
 }
 void display4() {
   segB();
-  delay(delayInt);
+  delay(refeshRate);
   segC();
-  delay(delayInt);
+  delay(refeshRate);
   segF();
-  delay(delayInt);
+  delay(refeshRate);
   segG();
-  delay(delayInt);
+  delay(refeshRate);
 }
 void display5() {
   segA();
-  delay(delayInt);
+  delay(refeshRate);
   segF();
-  delay(delayInt);
+  delay(refeshRate);
   segG();
-  delay(delayInt);
+  delay(refeshRate);
   segC();
-  delay(delayInt);
+  delay(refeshRate);
   segD();
-  delay(delayInt);
+  delay(refeshRate);
 }
 void display6() {
   segA();
-  delay(delayInt);
+  delay(refeshRate);
   segF();
-  delay(delayInt);
+  delay(refeshRate);
   segE();
-  delay(delayInt);
+  delay(refeshRate);
   segC();
-  delay(delayInt);
+  delay(refeshRate);
   segD();
-  delay(delayInt);
+  delay(refeshRate);
   segG();
-  delay(delayInt);
+  delay(refeshRate);
 }
 void display7() {
   segA();
-  delay(delayInt);
+  delay(refeshRate);
   segB();
-  delay(delayInt);
+  delay(refeshRate);
   segC();
-  delay(delayInt);
+  delay(refeshRate);
   segC();
+  delay(refeshRate);
 }
 void display8() {
   segA();
-  delay(delayInt);
+  delay(refeshRate);
   segF();
-  delay(delayInt);
+  delay(refeshRate);
   segG();
-  delay(delayInt);
+  delay(refeshRate);
   segC();
-  delay(delayInt);
+  delay(refeshRate);
   segD();
-  delay(delayInt);
+  delay(refeshRate);
   segE();
-  delay(delayInt);
+  delay(refeshRate);
   segB();
+  delay(refeshRate);
 }
 void display9() {
   segA();
-  delay(delayInt);
+  delay(refeshRate);
   segF();
-  delay(delayInt);
+  delay(refeshRate);
   segG();
-  delay(delayInt);
+  delay(refeshRate);
   segB();
-  delay(delayInt);
+  delay(refeshRate);
   segC();
-  delay(delayInt);
+  delay(refeshRate);
   segD();
+  delay(refeshRate);
 }
 void displayDP() {
   segDP();
@@ -248,13 +251,11 @@ void loop() {
   buttonState = analogRead(button);
 
   int potValue = analogRead(pot);
-  int mappedValue = map(potValue, 0, 1023, 1, 500);
-  delayInt = mappedValue;
+  int mappedValue = map(potValue, 0, 1023, 2, 500);
+  refeshRate = mappedValue;
 
   Serial.print("Mapped Value: ");
   Serial.println(mappedValue);
-  // delay(1);
-  
   
 
   if (buttonState < 500 && lastButtonState >= 500) {
