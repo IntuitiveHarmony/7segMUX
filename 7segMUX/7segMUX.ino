@@ -1,11 +1,16 @@
 //  Set delay time for the mux
-const int delayInt = 1;
+int delayInt = 1;
 
 // set pins
+// inputs
 const int button = A0;
+const int pot = A1;
+
+// Selectors on mulitiplexer
 const int S0 = 2;
 const int S1 = 3;
 const int S2 = 4;
+
 
 // ~~~~~~~~~~~~~~~
 // 7seg to MUX key
@@ -26,6 +31,8 @@ int number = 0;
 int buttonState = 0;
 int lastButtonState = 0;
 
+
+// Logic for the multiplexer
 void segA() {
   digitalWrite(S0, LOW);
   digitalWrite(S1, LOW);
@@ -99,6 +106,18 @@ void display2() {
   segD();
   delay(delayInt);
 }
+void display3() {
+  segA();
+  delay(delayInt);
+  segB();
+  delay(delayInt);
+  segG();
+  delay(delayInt);
+  segC();
+  delay(delayInt);
+  segD();
+  delay(delayInt);
+}
 void display4() {
   segB();
   delay(delayInt);
@@ -109,21 +128,108 @@ void display4() {
   segG();
   delay(delayInt);
 }
+void display5() {
+  segA();
+  delay(delayInt);
+  segF();
+  delay(delayInt);
+  segG();
+  delay(delayInt);
+  segC();
+  delay(delayInt);
+  segD();
+  delay(delayInt);
+}
+void display6() {
+  segA();
+  delay(delayInt);
+  segF();
+  delay(delayInt);
+  segE();
+  delay(delayInt);
+  segC();
+  delay(delayInt);
+  segD();
+  delay(delayInt);
+  segG();
+  delay(delayInt);
+}
+void display7() {
+  segA();
+  delay(delayInt);
+  segB();
+  delay(delayInt);
+  segC();
+  delay(delayInt);
+  segC();
+}
+void display8() {
+  segA();
+  delay(delayInt);
+  segF();
+  delay(delayInt);
+  segG();
+  delay(delayInt);
+  segC();
+  delay(delayInt);
+  segD();
+  delay(delayInt);
+  segE();
+  delay(delayInt);
+  segB();
+}
+void display9() {
+  segA();
+  delay(delayInt);
+  segF();
+  delay(delayInt);
+  segG();
+  delay(delayInt);
+  segB();
+  delay(delayInt);
+  segC();
+  delay(delayInt);
+  segD();
+}
 void displayDP() {
   segDP();
 }
 
 void checkNumber() {
-  if (number == 0) {
-    display0();
-  } else if (number == 1) {
-    display1();
-  } else if (number == 2) {
-    display2();
-  }else if (number == 4) {
-    display4();
-  } else {
-    displayDP();
+  switch (number) {
+    case 0:
+      display0();
+      break;
+    case 1:
+      display1();
+      break;
+    case 2:
+      display2();
+      break;
+    case 3:
+      display3();
+      break;
+    case 4:
+      display4();
+      break;
+    case 5:
+      display5();
+      break;
+    case 6:
+      display6();
+      break;
+    case 7:
+      display7();
+      break;
+    case 8:
+      display8();
+      break;
+    case 9:
+      display9();
+      break;
+    default:
+      displayDP();
+      break;
   }
 }
 
@@ -140,6 +246,14 @@ void setup() {
 
 void loop() {
   buttonState = analogRead(button);
+
+  int potValue = analogRead(pot);
+  int mappedValue = map(potValue, 0, 1023, 1, 500);
+  delayInt = mappedValue;
+
+  Serial.print("Mapped Value: ");
+  Serial.println(mappedValue);
+  // delay(1);
   
   
 
@@ -149,16 +263,11 @@ void loop() {
     } else {
       number++;
     }
-
-
-
     Serial.print("Number: ");
     Serial.println(number);
     delay(200);
   }
+
   lastButtonState = buttonState;
-    checkNumber();
-  
-
-
+  checkNumber();
 }
