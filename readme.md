@@ -1,54 +1,46 @@
 # 7segMUX
 
-I used a 74HC4052 multiplexer, Arduino Uno, 7 segment LED, bush button and a potentiometer to explore how multiplexers work.
+Explore the World of Multiplexers with Arduino Uno 🧩
 
-![demo.gif](demo.gif)
+This project delves into the fascinating realm of multiplexers, using a 74HC4052 multiplexer, an Arduino Uno, a 7-segment LED display, a push button, and a potentiometer to showcase their potential.
 
-The multiplexer uses logic to route a single input to one of many outputs.  These ICs can help us out by reducing the number of outputs used on the Arduino.  Multiplexers are commonly used with LEDs because you can cycle through the different outputs of the multiplexer quick enough to give the illusion that multiple LEDs are on simultaneously.  
+![Demo](demo.gif)
 
+## Introduction
+
+Multiplexers are essential components that use logical operations to route a single input to one of several outputs. They can significantly reduce the number of pins required on an Arduino or any microcontroller. In this project, we focus on their application with LEDs, as multiplexers allow us to cycle through different outputs rapidly, creating the illusion of multiple LEDs being lit simultaneously.
 
 ## Code
 
-In order to see this first hand, I wrote a sketch that upon pressing a button it increments a number on the seven segment LED.  The potentiometer is used to adjust the rate in which the multiplexer cycles through each led of the display number.
+To experience this concept firsthand, we've developed a sketch where pressing a button increments a number displayed on the seven-segment LED. The potentiometer controls the rate at which the multiplexer cycles through each LED segment.
 
-Here is the code that controls the logic of displaying the number 4
+Here's an excerpt of the code that illustrates how we display the number 4:
 
-```C++
-// Use the multiplexer logic to illuminate each segment individually
+```cpp
+// Use multiplexer logic to illuminate each segment individually
 void segB() {
   digitalWrite(S0, HIGH);
   digitalWrite(S1, HIGH);
   digitalWrite(S2, LOW);
 }
-void segC() {
-  digitalWrite(S0, HIGH);
-  digitalWrite(S1, HIGH);
-  digitalWrite(S2, HIGH);
-}
-void segF() {
-  digitalWrite(S0, HIGH);
-  digitalWrite(S1, LOW);
-  digitalWrite(S2, LOW);
-}
-void segG() {
-  digitalWrite(S0, LOW);
-  digitalWrite(S1, HIGH);
-  digitalWrite(S2, LOW);
-}
 
-// Cycle through each segment, refresh rate is controlled by the potentiometer 
+// (Additional segment functions here...)
+
+// Cycle through each segment; the refresh rate is controlled by the potentiometer 
 void display4() {
   segB();
-  delay(refeshRate);
+  delay(refreshRate);
   segC();
-  delay(refeshRate);
+  delay(refreshRate);
   segF();
-  delay(refeshRate);
+  delay(refreshRate);
   segG();
-  delay(refeshRate);
+  delay(refreshRate);
 }
 ```
 
 ## Wiring Diagram
+
+In our setup, we employed three striped wires to manage the logic and power supply for each of the eight LED segments individually.
 
 ![Wiring Diagram](muxDiagram.png)
